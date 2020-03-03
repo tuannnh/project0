@@ -1,21 +1,38 @@
 import React from "react";
 import "./assets/css/bootstrap.min.css";
 import "./assets/css/now-ui-kit.css";
-import { Button, Badge, Modal, Form, FormGroup, Input } from "reactstrap";
+import svglogo from "./assets/img/LinkSaver-logo.svg";
+import SVG from "react-inlinesvg";
+import {
+  Button,
+  Modal,
+  Form,
+  FormGroup,
+  Input,
+  Nav,
+  Navbar,
+  NavItem,
+  NavLink,
+  Container,
+  NavbarBrand
+} from "reactstrap";
 
 const Link = props => (
-  <tr>
-    <td>
-      <Badge color='info' href={props.link.content} target='_blank'>
+  <div>
+    <Navbar className='navbar-transparent row-link'>
+      <NavbarBrand href={props.link.content} target='_blank'>
         {props.link.title}
-      </Badge>
-    </td>
-    <td>
-      <Button color='danger' size='sm' onClick={props.onDelete}>
-        Delete
-      </Button>
-    </td>
-  </tr>
+      </NavbarBrand>
+
+      <Nav className='ml-auto' navbar>
+        <NavItem className='active'>
+          <NavLink href='#' onClick={props.onDelete}>
+            <i className='now-ui-icons ui-1_simple-remove text-danger'></i>
+          </NavLink>
+        </NavItem>
+      </Nav>
+    </Navbar>
+  </div>
 );
 
 class App extends React.Component {
@@ -113,27 +130,31 @@ class App extends React.Component {
   render() {
     return (
       <div className='link-list'>
-        <table>
-          <th>Link</th>
-          <th>Action</th>
-          <tbody>
-            {this.state.links.map(alink => (
-              <Link
-                key={alink.id}
-                onDelete={() => this.remove(alink.id)}
-                link={alink}
-              ></Link>
-            ))}
-          </tbody>
-        </table>
-        <Button
-          color='default'
-          size='md'
-          type='button'
-          onClick={() => this.setModalLive()}
-        >
-          Add
-        </Button>
+        <Navbar className='navbar-transparent' expand='lg'>
+          <Container>
+            <div className='navbar-translate'>
+              <NavbarBrand>
+                <SVG className='logo' src={svglogo} />
+              </NavbarBrand>
+            </div>
+
+            <Nav className='ml-auto' navbar>
+              <NavItem className='active'>
+                <NavLink href='#' onClick={() => this.setModalLive()}>
+                  <i className='now-ui-icons ui-1_simple-add add-button'></i>
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Container>
+        </Navbar>
+
+        {this.state.links.map(alink => (
+          <Link
+            key={alink.id}
+            onDelete={() => this.remove(alink.id)}
+            link={alink}
+          ></Link>
+        ))}
 
         <Modal toggle={() => this.setModalLive()} isOpen={this.state.modalLive}>
           <div className='modal-header'>
