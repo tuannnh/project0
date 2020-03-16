@@ -53,7 +53,7 @@ class App extends React.Component {
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
 
-    fetch("http://maimien.me:9000/saves/get", {
+    fetch("http://maimien.me:9900/saves/get", {
       mode: "cors",
       method: "GET",
       headers: headers
@@ -75,7 +75,7 @@ class App extends React.Component {
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
 
-    fetch("http://maimien.me:9000/saves/add", {
+    fetch("http://maimien.me:9900/saves/add", {
       mode: "cors",
       method: "POST",
       headers: headers,
@@ -96,7 +96,7 @@ class App extends React.Component {
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
 
-    fetch("http://maimien.me:9000/saves/delete/" + id, {
+    fetch("http://maimien.me:9900/saves/delete/" + id, {
       mode: "cors",
       method: "POST",
       headers: headers
